@@ -24,3 +24,10 @@ class BasePage():
     def is_visible(self, by_locator):
         element = self.wait.until(EC.visibility_of_element_located(by_locator))
         return bool(element)
+
+    """Given a locator for a text box, input text"""
+    def insert_text(self, locator, text):
+        try:
+            self.driver.find_element(*locator).send_keys(text)
+        except NoSuchElementException:
+            print('Could not find element {locator} to send {text}')
